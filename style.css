@@ -1,0 +1,2476 @@
+body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: 100vh;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+    width: 100%;
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    width: 160px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    width: 90%;
+    max-width: 900px; /*Edw allazw to width tou kairou  */
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+    margin-top: 80px;
+    margin-left: 250px;
+}
+
+.container.centered {
+    max-width: 700px; /* Μείωση του μέγιστου πλάτους */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 400px; /* Μετακίνηση περισσότερο προς τα κάτω */
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    width: 100%;
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    width: 95%;
+}
+
+.hourly-forecast img {
+    width: 30px;
+    height: 30px;
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+    width: 100%;
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+    width: 300px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+width: 250px;
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+width: 300px;
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    width: 300px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+width: 300px;
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+    width: 300px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+@media (max-width:480px) {
+    body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+   
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    
+    
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.container.centered {
+     
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    
+}
+
+.hourly-forecast img {
+    width: 30px;
+
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+   
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+   
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+   
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+    }
+
+@media(min-width:481px) and (max-width:767px) {
+    body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+   
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    
+    
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.container.centered {
+     
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    
+}
+
+.hourly-forecast img {
+    width: 30px;
+
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+   
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+   
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+   
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+    }
+@media (min-width:481px) and (max-width:767px) {
+    body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+   
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    
+    
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.container.centered {
+     
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    
+}
+
+.hourly-forecast img {
+    width: 30px;
+
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+   
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+   
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+   
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+    }
+@media (min-width:768px) and (max-width:1024) {
+    body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+   
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    
+    
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.container.centered {
+     
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    
+}
+
+.hourly-forecast img {
+    width: 30px;
+
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+   
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+   
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+   
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+    }
+@media (min-width:1025) and (max-width:1280px) {
+    body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+   
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    
+    
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.container.centered {
+     
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    
+}
+
+.hourly-forecast img {
+    width: 30px;
+
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+   
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+   
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+   
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+    }
+@media (max-width:1281px) {
+    body {
+    font-family: "Poppins", sans-serif;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    background-color: #e4e8eb;
+    margin: 0;
+    flex-direction: column;
+    position: relative;
+    color: #2c3e50;
+    overflow-x: hidden;
+    background-image: url('https://img.freepik.com/free-photo/photorealistic-style-clouds_23-2151058968.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.header {
+   
+    background-color: #1c3d5a;
+    color: #f1c40f;
+    padding: 15px 20px;
+    text-align: left;
+    font-size: 1.8rem;
+    font-weight: bold;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#cloudcast-header {
+    cursor: pointer;
+}
+
+.header input {
+    margin: 5px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.header button {
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: none;
+    background-color: #356ea8;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    position: relative;
+    right: 50px;
+    margin-left: 58px;
+}
+
+.header button:hover {
+    background-color: #274d7d;
+}
+
+.container {
+    
+    
+    background: #dde0e2;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.5s ease-in-out;
+    margin-bottom: 60px;
+}
+
+.container.centered {
+     
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px; /* Μείωση του padding αν χρειάζεται */
+}
+
+.forecast-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    
+}
+
+.day-forecast {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background: #a7a8aa;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    margin: 3px 0;
+    padding-bottom: 40px;
+}
+
+.hourly-forecast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    border-top: 1px solid #131212;
+    
+}
+
+.hourly-forecast img {
+    width: 30px;
+
+}
+
+.loading {
+    display: none;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.social-media {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: flex;
+    gap: 20px;
+    z-index: 1001;
+}
+
+.social-media a {
+    color: #131212;
+    font-size: 29px;
+    transition: color 0.3s ease;
+}
+
+.social-media a:hover {
+    color: #f1c40f;
+}
+
+.footer {
+   
+    background-color: #1c3d5a;
+    color: white;
+    text-align: center;
+    padding: 5px 5px;
+    position: absolute;
+    bottom: -9px;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    box-shadow: 0px -4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.footer a:hover {
+    color: #356ea8;
+}
+
+.day-forecast:hover {
+    transform: scale(1.02);
+    cursor: pointer;
+}
+
+.current-weather {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 400px; /* Μετακίνηση προς τα κάτω */
+   
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.current-weather h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.current-weather p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .current-weather {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.weather-map {
+display: none;
+position: absolute;
+right: 310px;
+top: 1150px;
+
+background-color: #f9f9f9;
+padding: 15px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.weather-map h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .weather-map {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.temperature-chart-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 1750px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+}
+
+.temperature-chart-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .temperature-chart-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.rain-radar {
+    display: none;
+    position: absolute;
+    right: 250px;
+    top: 2600px; /* Μετακίνηση προς τα κάτω */
+    
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.rain-radar h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.search-active .rain-radar {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+
+
+#rain-map {
+    height: 250px;
+    width: 250px;
+    border-radius: 10px;
+}
+
+.pressure-container {
+display: none;
+position: absolute;
+right: 250px;
+top: 2100px; /* Μετακίνηση προς τα κάτω */
+
+background-color: #f9f9f9;
+padding: 20px;
+border-radius: 10px;
+box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+margin-bottom: 200px; /* Προσθήκη περισσότερου κενού στο κάτω μέρος */
+}
+
+.pressure-container h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.pressure-container p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .pressure-container {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+
+.announcements {
+    display: none;
+    position: absolute;
+    right: 250px; /* Μετακίνηση περισσότερο προς τα αριστερά */
+    top: 100px;
+   
+    background-image: url('https://www.paintscapes.ca/cdn/shop/products/C8E6EA_1200x.png?v=1609955721');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+
+.announcements h3 {
+    margin-top: 0;
+    color: #1c3d5a;
+}
+
+.announcements p {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.search-active .announcements {
+    display: block; /* Εμφάνιση όταν γίνεται αναζήτηση */
+}
+    }

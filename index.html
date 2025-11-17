@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>CloudCast</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Leaflet JavaScript -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js" defer></script>
+    </head>
+    <body>
+
+        <div class="header" id="weatherContainer">
+            <span id="cloudcast-header"> CloudCast </span>
+            <div>
+                <input type="text" id="city" placeholder="Εισαγάγετε πόλη">
+                <button onclick="getWeather()">Αναζήτηση</button>
+            </div>
+        </div>
+        <div class="container centered" id="forecast-container">
+            <h2 id="welcome-message">Καλώς ήρθατε στην εφαρμογή καιρού!</h2>
+            <p id="welcome-text">  Αναζητήστε μια πόλη για να δείτε την πρόγνωση. </p>
+            <div class="loading" id="loading">⏳ Φόρτωση...</div>
+            <div>
+                <div id="forecast" class="forecast-container"></div>
+            </div>
+        </div>
+        
+        <div class="announcements">
+            <h3>Σελήνη και Προβλέψεις</h3>
+            <div id="moon-info">
+                <p>🔄 Φόρτωση δεδομένων Σελήνης...</p>
+            </div>
+        </div>
+        
+        <div class="current-weather">
+            <h3>Τρέχουσες Συνθήκες</h3>
+            <div id="current-weather-info">
+                <p>🔄 Φόρτωση δεδομένων...</p>
+            </div>
+        </div>
+    
+        <div class="weather-map">
+            <h3>Χάρτης Καιρού</h3>
+            <div id="weather-map" style="height: 300px; border-radius: 10px;"></div>
+        </div>
+    
+        <div class="temperature-chart-container">
+            <h3>Γράφημα Θερμοκρασίας</h3>
+            <canvas id="temperatureChart"></canvas>
+        </div>
+    
+        <div class="rain-radar">
+            <h3>Ραντάρ Βροχόπτωσης</h3>
+            <div id="rain-map"></div>
+        </div>
+    
+        <div class="pressure-container">
+            <h3>Ατμοσφαιρική Πίεση</h3>
+            <div id="pressure-info">
+                <p>🔄 Φόρτωση δεδομένων...</p>
+            </div>
+        </div>
+    
+        <div class="social-media">
+            <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        </div>
+        <div class="footer">
+            <p>&copy; 2025 CloudCast. Όλα τα δικαιώματα διατηρούνται. | <a href="#">Πολιτική Απορρήτου</a> | <a href="#">Όροι Χρήσης</a></p>
+        </div>
+        </body>
+        </html>
